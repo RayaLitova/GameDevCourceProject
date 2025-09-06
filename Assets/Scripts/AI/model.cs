@@ -7,37 +7,21 @@ using System.IO;
 
 public class GoogleAIManager : MonoBehaviour
 {
-    private string apiKey = null;
-    private string model = "gemini-1.5-flash";
-    
-    private string baseUrl = "https://generativelanguage.googleapis.com/v1beta/models/";
-    
-    public UnityEngine.UI.InputField inputField;
-    public UnityEngine.UI.Text responseText;
-    public UnityEngine.UI.Button sendButton;
-    
+    private static string apiKey = null;
+    private static string model = "gemini-1.5-flash";
+    private static string baseUrl = "https://generativelanguage.googleapis.com/v1beta/models/";
     void Awake()
     {
         GetApiKeyFromFile();
-        if (apiKey != null && sendButton != null)
-            sendButton.onClick.AddListener(SendRequest);
     }
 
-    private void GetApiKeyFromFile()
+    private static void GetApiKeyFromFile()
     {
         string filePath = Path.Combine(Application.streamingAssetsPath, "google_api_key.txt");
         if (File.Exists(filePath))
             apiKey = File.ReadAllText(filePath).Trim();
         else
             Debug.LogError("API Key file not found at: " + filePath);
-    }
-
-    public void SendRequest()
-    {
-        if (string.IsNullOrEmpty(inputField.text)) 
-            return;
-        
-        StartCoroutine(SendToGemini(ProcessInput(inputField.text)));
     }
 
     public void SendRequest(string message)
@@ -48,13 +32,8 @@ public class GoogleAIManager : MonoBehaviour
         StartCoroutine(SendToGemini(ProcessInput(message)));
     }
     
-    public IEnumerator SendToGemini(string message)
+    private IEnumerator SendToGemini(string message)
     {
-        if (sendButton != null) 
-            sendButton.interactable = false;
-        if (responseText != null) 
-            responseText.text = "Thinking...";
-        
         var request = new GeminiRequest
         {
             contents = new Content[]
@@ -89,13 +68,8 @@ public class GoogleAIManager : MonoBehaviour
             {
                 Debug.LogError($"Error: {webRequest.error}");
                 Debug.LogError($"Response: {webRequest.downloadHandler.text}");
-                if (responseText != null) 
-                    responseText.text = "Error: " + webRequest.error;
             }
         }
-        
-        if (sendButton != null) 
-            sendButton.interactable = true;
     }
     
     private void ProcessResponse(string jsonResponse)
@@ -107,10 +81,6 @@ public class GoogleAIManager : MonoBehaviour
             if (response.candidates != null && response.candidates.Length > 0)
             {
                 string aiResponse = response.candidates[0].content.parts[0].text;
-                
-                if (responseText != null)
-                    responseText.text = aiResponse;
-                
                 OnAIResponse(aiResponse);
             }
         }
