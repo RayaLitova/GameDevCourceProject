@@ -22,14 +22,26 @@ public class SpellGenerator : GoogleAIManager
         }
 
         GenerateEffect(spell, parameters[4]);
-        Debug.Log(spell.ToString());
 
         return spell;
     }
 
     private void GenerateEffect(SpellBase spell, string effect)
     {
-        spell.Effect += () => Debug.Log("Spell Cast: " + spell.name); 
+        foreach (string eff in effect.Split(','))
+        {
+            string trimmedEffect = eff.Trim();
+            var methodInfo = typeof(SpellEffects).GetMethod(trimmedEffect);
+            if (methodInfo != null)
+            {
+                System.Action action = (System.Action) System.Delegate.CreateDelegate(typeof(System.Action), methodInfo);
+                spell.Effect += action;
+            }
+            else
+            {
+                Debug.LogWarning($"Effect method '{trimmedEffect}' not found in SpellEffects.");
+            }
+        }
     }
 
     protected override string ProcessInput(string input)
@@ -40,7 +52,7 @@ public class SpellGenerator : GoogleAIManager
         prompt += "Name: <Spell Name>\n";
         prompt += "Description: <Brief description of the spell>\n";
         prompt += "Spell Type: <One of the following types - Fire, Water, Earth, Air, None>\n";
-        prompt += "Effect: <Zero or more of the following effects - " + string.Join(", ", SpellEffects.effect_names) + ">\n";
+        prompt += "Effect: <Zero or more of the following effects - " + string.Join(", ", SpellEffects.effect_names) + ", separated with commas>\n";
         prompt += "Cooldown: <Cooldown time in seconds, only for Active spells>\n";
         prompt += "Damage: <Damage amount, only for Active spells>\n";
         prompt += "\nEnsure the response is concise and strictly follows the format. The damage should be between 1 and 10.";
@@ -50,7 +62,6 @@ public class SpellGenerator : GoogleAIManager
 
     protected override void OnAIResponse(string response)
     {
-        Debug.Log("AI Response: " + response);
         List<string> parameters = new List<string>();
         string[] lines = response.Split('\n');
 
