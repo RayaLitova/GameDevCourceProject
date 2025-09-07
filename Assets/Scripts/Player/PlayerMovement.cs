@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -8,12 +9,16 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 movement;
     private Vector2 currentVelocity;
     private Rigidbody2D rb;
+	private Animator animator;
     private Vector2 targetVelocity;
-    
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         if (rb == null) return;
+		animator = GetComponent<Animator>();
+		if (animator == null) Debug.Assert(false, "Animator component missing from player.");
+		animator.SetTrigger("IDLE");
     }
     
     void Update()
@@ -28,13 +33,21 @@ public class PlayerMovement : MonoBehaviour
     
     void GetInput()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-        
-        movement = new Vector2(horizontal, vertical);
-        
-        if (movement.magnitude > 1)
-            movement = movement.normalized;
+
+		if(Input.GetKey(KeyCode.A)) 
+			animator.SetInteger("Direction", 1);
+		else if(Input.GetKey(KeyCode.W))
+			animator.SetInteger("Direction", 2);
+		else if(Input.GetKey(KeyCode.D))
+			animator.SetInteger("Direction", 3);
+		else if(Input.GetKey(KeyCode.S))
+			animator.SetInteger("Direction", 4);
+		else
+			animator.SetInteger("Direction", 0);
+
+		movement.x = Input.GetAxisRaw("Horizontal");
+		movement.y = Input.GetAxisRaw("Vertical");
+		movement = movement.normalized;
     }
     
     void MovePlayer()
@@ -42,6 +55,6 @@ public class PlayerMovement : MonoBehaviour
         if (rb == null) return;
         var speed = moveSpeed * (PlayerStats.speed_modifier / 100);
         targetVelocity = movement * speed;
-        rb.linearVelocity = Vector2.SmoothDamp(rb.linearVelocity, targetVelocity, ref currentVelocity, smoothTime);
+        rb.linearVelocity = targetVelocity;
     }
 }
