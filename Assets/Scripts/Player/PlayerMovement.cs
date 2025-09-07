@@ -40,8 +40,8 @@ public class PlayerMovement : MonoBehaviour
     void MovePlayer()
     {
         if (rb == null) return;
-        
-        targetVelocity = movement * moveSpeed;
+        var speed = moveSpeed;// * (Globals.player.speed_modifier / 100);
+        targetVelocity = movement * speed;
         rb.linearVelocity = Vector2.SmoothDamp(rb.linearVelocity, targetVelocity, ref currentVelocity, smoothTime);
     }
 }

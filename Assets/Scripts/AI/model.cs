@@ -8,7 +8,7 @@ using System.IO;
 public class GoogleAIManager : MonoBehaviour
 {
     private static string apiKey = null;
-    private static string model = "gemini-1.5-flash";
+    private static string model = "gemini-2.5-flash-lite";
     private static string baseUrl = "https://generativelanguage.googleapis.com/v1beta/models/";
     void Awake()
     {
