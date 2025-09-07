@@ -4,9 +4,17 @@ using System.Linq;
 
 public class SpellGenerator : GoogleAIManager
 {    
+    public UnityEngine.UI.Text input_field;
+
     void Start()
     {
-        SendRequest("I want a passive spell that heals me and increases my damage.");
+        //SendRequest("I want a passive spell that heals me and increases my damage.");
+    }
+
+    public void GenerateSpellFromDescription()
+    {
+        Debug.Log("Generating spell from description: " + input_field.text);
+        SendRequest(input_field.text);
     }
 
     public SpellBase GenerateSpell(List<string> parameters)
@@ -63,7 +71,7 @@ public class SpellGenerator : GoogleAIManager
         prompt += "There cannot be passive spells that deal damage or heal.";
         prompt += "If the spell deals damage to the player set the healing to minus the damage amount.";
         prompt += "If an effect has Active in its name it can only be used in active spells (the same applies for Passive).";
-        Debug.Log("Prompt:\n" + prompt);
+
         return prompt;
     }
 
@@ -84,6 +92,6 @@ public class SpellGenerator : GoogleAIManager
 
         SpellBase spell = GenerateSpell(parameters);
         if( spell == null ) return; // return some message
-        Globals.player.AddSpell(spell);
+        PlayerStats.AddSpell(spell);
     }
 }

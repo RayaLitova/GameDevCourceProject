@@ -90,7 +90,7 @@ public class ActiveSpell : SpellBase
     {
         if (!IsOffCooldown()) return;
 
-        Globals.player.Heal(base_healing);
+        PlayerStats.Heal(base_healing);
         DealDamage();
         Effect();
         ApplyCooldown();
@@ -98,7 +98,7 @@ public class ActiveSpell : SpellBase
 
     public void DealDamage()
     {
-        int total_damage = (int)(base_damage * (Globals.player.damage_modifier / 100.0f));
+        int total_damage = (int)(base_damage * (PlayerStats.damage_modifier / 100.0f));
         //TODO
         Debug.Log($"Dealt {total_damage} damage.");
     }

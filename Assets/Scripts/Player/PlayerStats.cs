@@ -1,29 +1,24 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class PlayerStats : MonoBehaviour
+public static class PlayerStats
 {
-    public int maxHealth = 100;
-    public int currentHealth;
-    public int level = 1;
-    public int experience = 0;
-    public int experienceToNextLevel = 100;
-    
-    public int damage_taken_modifier = 100; // percentage
-    public int damage_modifier = 100; // percentage
-    public int healing_modifier = 100; // percentage
-    public int speed_modifier = 100; // percentage
-    public int thorn_damage = 0; // flat damage reflected to attackers
+    public static int maxHealth = 100;
+    public static int currentHealth;
+    public static int level = 1;
+    public static int experience = 0;
+    public static int experienceToNextLevel = 100;
+ 
+    public static int damage_taken_modifier = 100; // percentage
+    public static int damage_modifier = 100; // percentage
+    public static int healing_modifier = 100; // percentage
+    public static int speed_modifier = 100; // percentage
+    public static int thorn_damage = 0; // flat damage reflected to attackers
+ 
+    public static List<PassiveSpell> passive_spells = new List<PassiveSpell>();
+    public static List<ActiveSpell> active_spells = new List<ActiveSpell>();
 
-    public List<PassiveSpell> passive_spells = new List<PassiveSpell>();
-    public List<ActiveSpell> active_spells = new List<ActiveSpell>();
-
-    void Awake()
-    {
-        Globals.player = this;
-    }
-
-    public void AddSpell(SpellBase spell)
+    public static void AddSpell(SpellBase spell)
     {
         if(spell is PassiveSpell)
         {
@@ -34,48 +29,43 @@ public class PlayerStats : MonoBehaviour
         active_spells.Add(spell as ActiveSpell);
     }
 
-    public void CastSpell(int index)
-    {
-        active_spells[index].Cast();
-    }
-
-    public void Heal(int amount)
+    public static void Heal(int amount)
     {
         if(amount <= 0)
         {
-            TakeDamage(-amount);
+            PlayerStats.TakeDamage(-amount);
             return;
         }
 
-        currentHealth += (int)(amount * (healing_modifier / 100.0f));
-        if (currentHealth > maxHealth)
-            currentHealth = maxHealth;
+        PlayerStats.currentHealth += (int)(amount * (PlayerStats.healing_modifier / 100.0f));
+        if (PlayerStats.currentHealth > PlayerStats.maxHealth)
+            PlayerStats.currentHealth = PlayerStats.maxHealth;
     }
 
-    public void TakeDamage(int amount)
+    public static void TakeDamage(int amount)
     {
-        currentHealth -= (int)(amount * (damage_taken_modifier / 100.0f));
-        if (currentHealth < 0)
-            currentHealth = 0;
-        //if (thorn_damage > 0 && source != null)
-        //    source.TakeDamage(thorn_damage);
+        PlayerStats.currentHealth -= (int)(amount * (PlayerStats.damage_taken_modifier / 100.0f));
+        if (PlayerStats.currentHealth < 0)
+            PlayerStats.currentHealth = 0;
+        //if (PlayerStats.thorn_damage > 0 && source != null)
+        //    source.TakeDamage(PlayerStats.thorn_damage);
     }
 
-    public void GainExperience(int amount)
+    public static void GainExperience(int amount)
     {
-        experience += amount;
-        while (experience >= experienceToNextLevel)
+        PlayerStats.experience += amount;
+        while (PlayerStats.experience >= PlayerStats.experienceToNextLevel)
         {
-            experience -= experienceToNextLevel;
-            experienceToNextLevel = (int)(experienceToNextLevel * 1.5f);
-            LevelUp();
+            PlayerStats.experience -= PlayerStats.experienceToNextLevel;
+            PlayerStats.experienceToNextLevel = (int)(PlayerStats.experienceToNextLevel * 1.5f);
+            PlayerStats.LevelUp();
         }
     }
 
-    public void LevelUp()
+    public static void LevelUp()
     {
-        level++;
-        maxHealth += 20;
-        currentHealth = maxHealth;
+        PlayerStats.level++;
+        PlayerStats.maxHealth += 20;
+        PlayerStats.currentHealth = PlayerStats.maxHealth;
     }
 }

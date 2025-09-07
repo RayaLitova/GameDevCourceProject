@@ -28,7 +28,6 @@ public class GoogleAIManager : MonoBehaviour
     {
         if (string.IsNullOrEmpty(message)) 
             return;
-
         StartCoroutine(SendToGemini(ProcessInput(message)));
     }
     

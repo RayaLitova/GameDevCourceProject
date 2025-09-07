@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerEnterScene : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float smoothTime = 0.1f;
     
-    private Vector2 movement;
     private Vector2 currentVelocity;
     private Rigidbody2D rb;
     private Vector2 targetVelocity;
+    private Vector2 endPos = new Vector2(1, 0);
     
     void Start()
     {
@@ -16,32 +16,21 @@ public class PlayerMovement : MonoBehaviour
         if (rb == null) return;
     }
     
-    void Update()
-    {
-        GetInput();
-    }
-    
     void FixedUpdate()
     {
         MovePlayer();
-    }
-    
-    void GetInput()
-    {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-        
-        movement = new Vector2(horizontal, vertical);
-        
-        if (movement.magnitude > 1)
-            movement = movement.normalized;
+        if(transform.position.x >= endPos.x)
+        {
+            Destroy(this);
+            Destroy(rb);
+        }
     }
     
     void MovePlayer()
     {
         if (rb == null) return;
-        var speed = moveSpeed * (PlayerStats.speed_modifier / 100);
-        targetVelocity = movement * speed;
+        var speed = moveSpeed;
+        targetVelocity = endPos * speed;
         rb.linearVelocity = Vector2.SmoothDamp(rb.linearVelocity, targetVelocity, ref currentVelocity, smoothTime);
     }
 }
