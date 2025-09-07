@@ -18,7 +18,6 @@ public class PlayerMovement : MonoBehaviour
         if (rb == null) return;
 		animator = GetComponent<Animator>();
 		if (animator == null) Debug.Assert(false, "Animator component missing from player.");
-		animator.SetTrigger("IDLE");
     }
     
     void Update()
