@@ -42,13 +42,13 @@ public static class PlayerStats
             PlayerStats.currentHealth = PlayerStats.maxHealth;
     }
 
-    public static void TakeDamage(int amount)
+    public static void TakeDamage(int amount, EnemyBase enemy = null)
     {
         PlayerStats.currentHealth -= (int)(amount * (PlayerStats.damage_taken_modifier / 100.0f));
         if (PlayerStats.currentHealth < 0)
             PlayerStats.currentHealth = 0;
-        //if (PlayerStats.thorn_damage > 0 && source != null)
-        //    source.TakeDamage(PlayerStats.thorn_damage);
+        if (PlayerStats.thorn_damage > 0 && enemy != null)
+            enemy.TakeDamage(PlayerStats.thorn_damage);
     }
 
     public static void GainExperience(int amount)
