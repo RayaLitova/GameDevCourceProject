@@ -1803,7 +1803,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   input_field: {fileID: 919323082}
   input: {fileID: 438197521}
-  spell_effect_prefab: {fileID: 0}
+  spell_effect_prefab: {fileID: 2323473171503516658, guid: 2ec3806249d9962dca4df4d16a6e97de, type: 3}
+  spell_icons:
+  - {fileID: 8600823734317723969, guid: 28a5e4f0c10fd9028a4e2778fd3b80b4, type: 3}
+  - {fileID: 5451797455560910174, guid: 28a5e4f0c10fd9028a4e2778fd3b80b4, type: 3}
+  - {fileID: 6570089448019361436, guid: 28a5e4f0c10fd9028a4e2778fd3b80b4, type: 3}
+  - {fileID: 1911623497472492325, guid: 28a5e4f0c10fd9028a4e2778fd3b80b4, type: 3}
 --- !u!95 &1846865202
 Animator:
   serializedVersion: 7

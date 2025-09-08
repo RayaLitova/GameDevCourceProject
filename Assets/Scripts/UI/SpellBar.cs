@@ -8,7 +8,6 @@ public class SpellBarHandler : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Player").GetComponent<PlayerSpells>();
-        Debug.Log(PlayerStats.active_spells.Count);
         for (int i = 0; i < PlayerStats.active_spells.Count; i++)
             gameObject.transform.GetChild(i).GetComponent<Image>().sprite = PlayerStats.active_spells[i].icon;
     }

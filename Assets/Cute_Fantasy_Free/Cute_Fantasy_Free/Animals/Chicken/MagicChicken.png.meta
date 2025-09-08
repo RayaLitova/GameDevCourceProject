@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: badd2cc245a96c04f91c6cfe32b33686
+guid: c5ec9fbd2f0bc7f48b8ca6790dc0c512
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5336855417275088078
-    second: Chicken_0
+      213: -1694450991358079360
+    second: MagicChicken_0
   - first:
-      213: -1433109330887674863
-    second: Chicken_1
+      213: -6055479365626870976
+    second: MagicChicken_1
   - first:
-      213: -1642514149361250337
-    second: Chicken_2
+      213: -866358257186064766
+    second: MagicChicken_2
   - first:
-      213: -6988750562667468047
-    second: Chicken_3
+      213: 4542464833121466622
+    second: MagicChicken_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -122,10 +122,32 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Chicken_0
+      name: MagicChicken_0
       rect:
         serializedVersion: 2
         x: 9
+        y: 39
+        width: 15
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08e0bca0dc91c78e0800000000000000
+      internalID: -1694450991358079360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MagicChicken_1
+      rect:
+        serializedVersion: 2
+        x: 41
         y: 39
         width: 15
         height: 16
@@ -137,42 +159,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: eccfc44e9b1501a40800000000000000
-      internalID: 5336855417275088078
+      spriteID: 0434a1ba99d96fba0800000000000000
+      internalID: -6055479365626870976
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chicken_1
-      rect:
-        serializedVersion: 2
-        x: 41
-        y: 39
-        width: 15
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 114742018a29c1ce0800000000000000
-      internalID: -1433109330887674863
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Chicken_2
+      name: MagicChicken_2
       rect:
         serializedVersion: 2
         x: 9
         y: 7
         width: 15
-        height: 17
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,20 +181,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fdf05c4651e9439e0800000000000000
-      internalID: -1642514149361250337
+      spriteID: 286b23851c31af3f0800000000000000
+      internalID: -866358257186064766
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chicken_3
+      name: MagicChicken_3
       rect:
         serializedVersion: 2
         x: 41
         y: 7
         width: 15
-        height: 17
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,8 +203,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1fae4682468f20f90800000000000000
-      internalID: -6988750562667468047
+      spriteID: ef8b8eed2b31a0f30800000000000000
+      internalID: 4542464833121466622
       vertices: []
       indices: 
       edges: []
@@ -223,10 +223,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Chicken_0: 5336855417275088078
-      Chicken_1: -1433109330887674863
-      Chicken_2: -1642514149361250337
-      Chicken_3: -6988750562667468047
+      MagicChicken_0: -1694450991358079360
+      MagicChicken_1: -6055479365626870976
+      MagicChicken_2: -866358257186064766
+      MagicChicken_3: 4542464833121466622
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

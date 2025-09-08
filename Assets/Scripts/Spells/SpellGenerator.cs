@@ -12,11 +12,6 @@ public class SpellGenerator : GoogleAIManager
 
 	public Sprite[] spell_icons;
 
-    void Start()
-    {
-        //SendRequest("I want a passive spell that heals me and increases my damage.");
-    }
-
     public void GenerateSpellFromDescription()
     {
         Debug.Log("Generating spell from description: " + input_field.text);
