@@ -7,8 +7,8 @@ public static class PlayerStats
     public static int currentHealth;
     public static int level = 1;
     public static int experience = 0;
-    public static int experienceToNextLevel = 100;
-    public static int available_generations = 1;
+    public static int experienceToNextLevel = 50;
+    public static int available_generations = 3;
  
     public static int damage_taken_modifier = 100; // percentage
     public static int damage_modifier = 100; // percentage
@@ -69,5 +69,6 @@ public static class PlayerStats
         PlayerStats.level++;
         PlayerStats.maxHealth += 20;
         PlayerStats.currentHealth = PlayerStats.maxHealth;
+        Debug.Log("Level up!");
     }
 }

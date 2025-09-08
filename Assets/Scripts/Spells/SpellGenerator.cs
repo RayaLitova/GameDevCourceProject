@@ -46,7 +46,11 @@ public class SpellGenerator : GoogleAIManager
             {
                 (spell as ActiveSpell).cooldown = int.Parse(parameters[5]);
                 (spell as ActiveSpell).base_damage = int.Parse(parameters[6]);
-                (spell as ActiveSpell).base_healing = int.Parse(parameters[7]);
+                if(parameters.Count > 7)
+                    (spell as ActiveSpell).base_healing = int.Parse(parameters[7]);
+                else
+                    (spell as ActiveSpell).base_healing = 0;
+                    
 				(spell as ActiveSpell).effectPrefab = spell_effect_prefab;
             }
 
@@ -81,7 +85,6 @@ public class SpellGenerator : GoogleAIManager
         prompt += "\nEnsure the response is concise and strictly follows the format.";
         prompt += "The base_damage should be between 1 and 10.";
         prompt += "There cannot be passive spells that deal damage or heal.";
-        prompt += "If the spell deals damage to the player set the healing to minus the damage amount.";
         prompt += "If an effect has Active in its name it can only be used in active spells (the same applies for Passive).";
 
         return prompt;

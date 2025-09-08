@@ -108,6 +108,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     public void Death()
     {
+        PlayerStats.GainExperience(10);
         Destroy(this.gameObject);
     }
     
