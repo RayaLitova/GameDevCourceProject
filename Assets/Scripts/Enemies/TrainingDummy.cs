@@ -11,7 +11,6 @@ public class TrainingDummy : MonoBehaviour, IDamageable
 
     public void TakeDamage(int amount)
     {
-        Debug.Log("Training Dummy took " + amount + " damage.");
         animator.SetTrigger("IsHit");
     }
 

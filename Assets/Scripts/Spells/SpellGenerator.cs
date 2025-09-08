@@ -14,7 +14,6 @@ public class SpellGenerator : GoogleAIManager
 
     public void GenerateSpellFromDescription()
     {
-        Debug.Log("Generating spell from description: " + input_field.text);
         SendRequest(input_field.text);
         input_field.text = "";
         PlayerStats.available_generations--;
@@ -50,7 +49,7 @@ public class SpellGenerator : GoogleAIManager
                     (spell as ActiveSpell).base_healing = int.Parse(parameters[7]);
                 else
                     (spell as ActiveSpell).base_healing = 0;
-                    
+
 				(spell as ActiveSpell).effectPrefab = spell_effect_prefab;
             }
 

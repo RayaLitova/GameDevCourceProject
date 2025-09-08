@@ -20,39 +20,34 @@ public class SpellBullet : MonoBehaviour
 
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.CompareTag(hit_tag))
-		{
-			if(hit_tag == "Enemy")
-            	spell.OnHit(other.GetComponent<IDamageable>());
-			else
-				PlayerStats.TakeDamage(damage);
+		if (!other.CompareTag(hit_tag)) return;
 
-			Debug.Log("SpellBullet hit " + other.name);
+		if(hit_tag == "Enemy")
+			spell.OnHit(other.GetComponent<IDamageable>());
+		else
+			PlayerStats.TakeDamage(damage);
 
-			Vector2 position = Vector2.Lerp(transform.position, other.transform.position, 0.5f);
+		Vector2 position = Vector2.Lerp(transform.position, other.transform.position, 0.5f);
 
-			float height = other.transform.position.y - 0.6f;
+		float height = other.transform.position.y - 0.6f;
 
-			Destroy(gameObject);
+		Destroy(gameObject);
 
-			if(spell != null) {
-				GameObject effect = Instantiate(spell.effectPrefab, position, Quaternion.identity);
-				UnityEngine.VFX.VisualEffect vfx = effect.GetComponent<UnityEngine.VFX.VisualEffect>();
-				vfx.SetFloat("height", height);
+		if(spell != null) {
+			GameObject effect = Instantiate(spell.effectPrefab, position, Quaternion.identity);
+			UnityEngine.VFX.VisualEffect vfx = effect.GetComponent<UnityEngine.VFX.VisualEffect>();
+			vfx.SetFloat("height", height);
 
-				var gradient = vfx.GetGradient("ColorGradient");
-				Debug.Log(spell.spellType);
-				var keys = gradient.colorKeys;
-				keys[0].color = color[(int)spell.spellType % color.Length].Item1;
-				keys[1].color = color[(int)spell.spellType % color.Length].Item2;
-				gradient.colorKeys = keys;
-				vfx.SetGradient("ColorGradient", gradient);
+			var gradient = vfx.GetGradient("ColorGradient");
+			var keys = gradient.colorKeys;
+			keys[0].color = color[(int)spell.spellType % color.Length].Item1;
+			keys[1].color = color[(int)spell.spellType % color.Length].Item2;
+			gradient.colorKeys = keys;
+			vfx.SetGradient("ColorGradient", gradient);
 
-				Destroy(effect, 2f);
-			} else {
-				Debug.Log("No spell assigned to SpellBullet.");
-			}
-
+			Destroy(effect, 2f);
+		} else {
+			Debug.Log("No spell assigned to SpellBullet.");
 		}
 	}
 }
