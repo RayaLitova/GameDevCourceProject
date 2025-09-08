@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerSpells : MonoBehaviour
 {
-
 	public GameObject spellPrefab;
 	public float spellDestroyTime = 4.9f;
 

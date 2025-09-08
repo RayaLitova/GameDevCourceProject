@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class EnemyBase : MonoBehaviour, IDamageable
 {
-    public int max_health;
+    public int max_health = 10;
     public int current_health;
     public int damage;
     public float move_speed;
@@ -11,14 +11,14 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     public int healing;
     public float attack_cooldown = 1f;
 
-    private Rigidbody2D rb;
-    private Vector2 targetVelocity;
-    private GameObject player;
-    private float next_attack_time;
-    private Animator animator;
-    private SpriteRenderer sprite_renderer;
+    protected Rigidbody2D rb;
+    protected Vector2 targetVelocity;
+    protected GameObject player;
+    protected float next_attack_time;
+    protected Animator animator;
+    protected SpriteRenderer sprite_renderer;
 
-    void Start()
+    public void Start()
     {
         player = GameObject.FindWithTag("Player");
         rb = GetComponent<Rigidbody2D>();
@@ -57,7 +57,7 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         rb.linearVelocity = targetVelocity;
     }
 
-    private void Attack()
+    public virtual void Attack()
     {
         rb.linearVelocity = Vector2.zero;
         if(animator.GetBool("isMoving"))
