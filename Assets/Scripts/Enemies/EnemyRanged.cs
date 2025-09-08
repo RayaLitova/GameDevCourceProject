@@ -7,18 +7,25 @@ public class EnemyRanged : EnemyBase
     public GameObject spellPrefab;
 	public float spellDestroyTime = 4.9f;
 
-    public List<Tuple<GameObject, float>> castSpells = new List<Tuple<GameObject, float>>();
+	private ActiveSpell spell;
 
-    public EnemyRanged(int max_health, int damage, int healing, float move_speed) : base(max_health, damage, healing, move_speed){}
+    public EnemyRanged(int max_health, int damage, int healing, float move_speed) : base(max_health, damage, healing, move_speed){
+	}
 
-	void FilterSpells()
-	{
-		castSpells.ForEach(x => {
-			if (Time.time - x.Item2 > spellDestroyTime)
-				Destroy(x.Item1);
-			x = null;
-		});
-		castSpells.RemoveAll(x => x == null);
+	public void Start() {
+		base.Start();
+		SpellGenerator spellGenerator = GameObject.FindFirstObjectByType<SpellGenerator>();
+		spell = spellGenerator.GenerateSpell(new List<string>{
+			"Active",
+			"IceShard",
+			"A shard of ice that deals damage and slows the target.",
+			"Water",
+			"ModifyDamage",
+			0.ToString(),
+			5.ToString(),
+			0.ToString()
+		}) as ActiveSpell;
+		Debug.Log("Enemy spell: " + spell.name + " - " + spell.description);
 	}
 
 	public override void Attack()
@@ -37,11 +44,10 @@ public class EnemyRanged : EnemyBase
 		Vector2 direction = (target - pos).normalized;
 
 		GameObject spellBullet = Instantiate(spellPrefab, pos, Quaternion.identity);
-        spellBullet.GetComponent<SpellBullet>().damage = damage;
-        spellBullet.GetComponent<SpellBullet>().hit_tag = "Player";
+        SpellBullet sbData = spellBullet.GetComponent<SpellBullet>();
+		sbData.spell = spell;
+        sbData.hit_tag = "Player";
 		spellBullet.GetComponent<Rigidbody2D>().linearVelocity = direction * 10f;
-		castSpells.Add(new Tuple<GameObject, float>(spellBullet, Time.time));
-
-		Invoke("FilterSpells", 5f);
+		Destroy(spellBullet, spellDestroyTime);
 	}
 }

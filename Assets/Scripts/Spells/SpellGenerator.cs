@@ -6,6 +6,8 @@ public class SpellGenerator : GoogleAIManager
 {    
     public UnityEngine.UI.Text input_field;
 
+	public GameObject spell_effect_prefab;
+
     void Start()
     {
         //SendRequest("I want a passive spell that heals me and increases my damage.");
@@ -36,6 +38,7 @@ public class SpellGenerator : GoogleAIManager
                 (spell as ActiveSpell).cooldown = int.Parse(parameters[5]);
                 (spell as ActiveSpell).base_damage = int.Parse(parameters[6]);
                 (spell as ActiveSpell).base_healing = int.Parse(parameters[7]);
+				(spell as ActiveSpell).effectPrefab = spell_effect_prefab;
             }
 
             GenerateEffect(spell, parameters[4]);
