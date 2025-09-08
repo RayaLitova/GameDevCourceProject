@@ -10,6 +10,13 @@ public class SpellGenerator : GoogleAIManager
 	public GameObject spell_effect_prefab;
     private bool should_close_after_adding = false;
 
+	public Sprite[] spell_icons;
+
+    void Start()
+    {
+        //SendRequest("I want a passive spell that heals me and increases my damage.");
+    }
+
     public void GenerateSpellFromDescription()
     {
         Debug.Log("Generating spell from description: " + input_field.text);
@@ -39,6 +46,7 @@ public class SpellGenerator : GoogleAIManager
             spell.name = parameters[1];
             spell.description = parameters[2];
             spell.spellType = (SpellType) System.Enum.Parse(typeof(SpellType), parameters[3]);
+			spell.icon = spell_icons.Length > 0 ? spell_icons[(int)spell.spellType] : null;
             if(isActive) 
             {
                 (spell as ActiveSpell).cooldown = int.Parse(parameters[5]);

@@ -1,5 +1,4 @@
 using UnityEngine;
-using System;
 using System.Collections.Generic;
 
 public class EnemyRanged : EnemyBase
@@ -19,10 +18,10 @@ public class EnemyRanged : EnemyBase
 			"Active",
 			"IceShard",
 			"A shard of ice that deals damage and slows the target.",
-			"Water",
+			((SpellType)Random.Range(0, 3)).ToString(),
 			"ModifyDamage",
-			0.ToString(),
-			5.ToString(),
+			attack_cooldown.ToString(),
+			Random.Range(3, 7).ToString(),
 			0.ToString()
 		}) as ActiveSpell;
 	}

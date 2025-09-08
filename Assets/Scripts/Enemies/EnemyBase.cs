@@ -74,25 +74,27 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
 
     public void Roam()
     {
-        if(Random.Range(0, 100) > 70) 
-        {
-            if(animator.GetBool("isMoving"))
-                animator.SetBool("isMoving", false); 
-            roam_direction = Vector2.zero;
-            roam_change_time = Time.time + 3f;
-            rb.linearVelocity = Vector2.zero;
-            return;
-        }
         if(roam_change_time < Time.time) 
         {
-            roam_direction = transform.position + new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), 0);
-            roam_change_time = Time.time + 2f;
+			if(Random.Range(0, 100) > 30) 
+        	{
+        	    if(animator.GetBool("isMoving"))
+        	        animator.SetBool("isMoving", false); 
+        	    roam_direction = Vector2.zero;
+        	    roam_change_time = Time.time + 3f;
+        	    rb.linearVelocity = Vector2.zero;
+        	    return;
+        	}
+
+			roam_direction.x = Random.Range(-10, 10);
+			roam_direction.y = Random.Range(-10, 10);
+			roam_change_time = Time.time + 2f;
         }
 
         sprite_renderer.flipX = roam_direction.x < 0;
         if(!animator.GetBool("isMoving"))
             animator.SetBool("isMoving", true);
-        targetVelocity = roam_direction.normalized * move_speed;
+        targetVelocity = roam_direction.normalized * move_speed * 0.5f;
         rb.linearVelocity = targetVelocity;
     }
 

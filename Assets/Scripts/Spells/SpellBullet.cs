@@ -14,6 +14,10 @@ public class SpellBullet : MonoBehaviour
 		new Tuple<Color, Color>(Color.white, Color.gray),
 	};
 
+	void Start() {
+		GetComponent<SpriteRenderer>().sprite = spell.icon;
+	}
+
 	void OnTriggerEnter2D(Collider2D other)
 	{
 		if (other.CompareTag(hit_tag))
