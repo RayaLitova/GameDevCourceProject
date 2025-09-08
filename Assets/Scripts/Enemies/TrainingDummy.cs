@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TrainingDummy : MonoBehaviour
+public class TrainingDummy : MonoBehaviour, IDamageable
 {
     private Animator animator;
 

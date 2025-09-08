@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class EnemyBase : MonoBehaviour
+public abstract class EnemyBase : MonoBehaviour, IDamageable
 {
     public int max_health;
     public int current_health;
@@ -70,7 +70,7 @@ public abstract class EnemyBase : MonoBehaviour
         PlayerStats.TakeDamage(damage, this);
     } 
 
-    public void TakeDamage(int amount)
+    public virtual void TakeDamage(int amount)
     {
         animator.SetTrigger("isHit");
         current_health -= (int)(amount);
