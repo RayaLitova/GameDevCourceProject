@@ -9,9 +9,12 @@ public class PlayerSpells : MonoBehaviour
 
 	public List<Tuple<GameObject, float>> castSpells = new List<Tuple<GameObject, float>>();
 
+	public GameObject dummyEffectPrefab;
+
 	void Start()
 	{
 		PlayerStats.active_spells.Add(new ActiveSpell("Fireball", "Ball of fire", SpellType.Fire, 2, 5, 5));
+		PlayerStats.active_spells[0].effectPrefab = dummyEffectPrefab;
 	}
 
     void Update()

@@ -74,6 +74,8 @@ public class ActiveSpell : SpellBase
 
     private float next_cast_time;
 
+	public GameObject effectPrefab;
+
     public ActiveSpell() : base(){ }
 
     public ActiveSpell(ActiveSpell other) : base(other) 

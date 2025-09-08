@@ -12,12 +12,7 @@ public class TrainingDummy : MonoBehaviour, IDamageable
     public void TakeDamage(int amount)
     {
         Debug.Log("Training Dummy took " + amount + " damage.");
-        animator.SetBool("IsHit", true);
-        Invoke("ResetHit", 2f);
+        animator.SetTrigger("IsHit");
     }
 
-    private void ResetHit()
-    {
-        animator.SetBool("IsHit", false);
-    }
 }
