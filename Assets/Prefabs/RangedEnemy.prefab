@@ -133,7 +133,7 @@ MonoBehaviour:
   attack_range: 4
   healing: 0
   attack_cooldown: 6
-  spellPrefab: {fileID: 0}
+  spellPrefab: {fileID: 8025839311511516802, guid: 06f9400e94ce89d59a0422d84ac0a9fb, type: 3}
   spellDestroyTime: 3
 --- !u!50 &4096478930601487816
 Rigidbody2D:

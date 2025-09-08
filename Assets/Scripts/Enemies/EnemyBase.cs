@@ -17,6 +17,8 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
     protected float next_attack_time;
     protected Animator animator;
     protected SpriteRenderer sprite_renderer;
+    protected Vector2 roam_direction;
+    protected float roam_change_time = 0;
 
     public void Start()
     {
@@ -34,8 +36,8 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
             Attack();
         else if (dist <= engage_distance)
             MoveTowardsPlayer();
-        else if (animator.GetBool("isMoving"))
-            animator.SetBool("isMoving", false);
+        else 
+            Roam();
     }
 
     public EnemyBase(int max_health, int damage, int healing, float move_speed)
@@ -69,6 +71,30 @@ public abstract class EnemyBase : MonoBehaviour, IDamageable
         next_attack_time = Time.time + attack_cooldown;
         PlayerStats.TakeDamage(damage, this);
     } 
+
+    public void Roam()
+    {
+        if(Random.Range(0, 100) > 70) 
+        {
+            if(animator.GetBool("isMoving"))
+                animator.SetBool("isMoving", false); 
+            roam_direction = Vector2.zero;
+            roam_change_time = Time.time + 3f;
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
+        if(roam_change_time < Time.time) 
+        {
+            roam_direction = transform.position + new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), 0);
+            roam_change_time = Time.time + 2f;
+        }
+
+        sprite_renderer.flipX = roam_direction.x < 0;
+        if(!animator.GetBool("isMoving"))
+            animator.SetBool("isMoving", true);
+        targetVelocity = roam_direction.normalized * move_speed;
+        rb.linearVelocity = targetVelocity;
+    }
 
     public virtual void TakeDamage(int amount)
     {
