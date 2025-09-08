@@ -19,6 +19,7 @@ public abstract class SpellBase
     public string description;
     public SpellType spellType;
     public Action Effect = () => {};
+    public Sprite icon;
     
     public abstract bool Cast();
 
