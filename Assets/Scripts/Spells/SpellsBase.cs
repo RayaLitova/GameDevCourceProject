@@ -20,7 +20,7 @@ public abstract class SpellBase
     public SpellType spellType;
     public Action Effect = () => {};
     
-    public abstract void Cast();
+    public abstract bool Cast();
 
     public SpellBase() { }
 
@@ -53,9 +53,10 @@ public abstract class SpellBase
 public class PassiveSpell : SpellBase
 {
     public PassiveSpell() : base(){ }
-    public override void Cast()
+    public override bool Cast()
     {
         Effect();
+		return true;
     }
 
     public override string ToString()
@@ -102,10 +103,11 @@ public class ActiveSpell : SpellBase
         return Time.time >= next_cast_time;
     }
 
-    public override void Cast()
+    public override bool Cast()
     {
-        if (!IsOffCooldown()) return;
+        if (!IsOffCooldown()) return false;
         ApplyCooldown();
+		return true;
     }
 
     public void OnHit(IDamageable other)

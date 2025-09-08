@@ -23,6 +23,9 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         GetInput();
+
+		Camera.main.transform.position += (transform.position - Camera.main.transform.position) * 0.1f;
+		Camera.main.transform.position += new Vector3(0, 0, -10);
     }
     
     void FixedUpdate()

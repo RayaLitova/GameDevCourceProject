@@ -10,7 +10,6 @@ public class SpellBullet : MonoBehaviour
 	{
 		if (other.CompareTag(hit_tag))
 		{
-			Debug.Log("Spell hit an enemy!");
 			if(hit_tag == "Enemy")
             	spell.OnHit(other.GetComponent<IDamageable>());
 			else
@@ -18,8 +17,7 @@ public class SpellBullet : MonoBehaviour
 
 			Vector2 position = Vector2.Lerp(transform.position, other.transform.position, 0.5f);
 
-			float height = other.transform.position.y - 0.8f;
-			Debug.Log("Height: " + height);
+			float height = other.transform.position.y - 0.6f;
 
 			GameObject effect = Instantiate(spell.effectPrefab, position, Quaternion.identity);
 			effect.GetComponent<UnityEngine.VFX.VisualEffect>().SetFloat("height", height);

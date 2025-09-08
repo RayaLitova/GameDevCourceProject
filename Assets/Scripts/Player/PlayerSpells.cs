@@ -38,16 +38,16 @@ public class PlayerSpells : MonoBehaviour
 
 	void CastSpell(Vector2 target, ActiveSpell spell)
 	{
-		Debug.Log("Casting spell at " + target);
-		spell.Cast();
-		Vector2 pos = transform.position;
-		Vector2 direction = (target - pos).normalized;
+		if(spell.Cast()) {
+			Vector2 pos = transform.position;
+			Vector2 direction = (target - pos).normalized;
 
-		GameObject spellBullet = Instantiate(spellPrefab, pos, Quaternion.identity);
-		spellBullet.GetComponent<SpellBullet>().spell = spell;
-		spellBullet.GetComponent<Rigidbody2D>().linearVelocity = direction * 10f;
-		castSpells.Add(new Tuple<GameObject, float>(spellBullet, Time.time));
+			GameObject spellBullet = Instantiate(spellPrefab, pos, Quaternion.identity);
+			spellBullet.GetComponent<SpellBullet>().spell = spell;
+			spellBullet.GetComponent<Rigidbody2D>().linearVelocity = direction * 10f;
+			castSpells.Add(new Tuple<GameObject, float>(spellBullet, Time.time));
 
-		Invoke("FilterSpells", 5f);
+			Invoke("FilterSpells", 5f);
+		}
 	}
 }
