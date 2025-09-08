@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4149264700945316050}
   - component: {fileID: 2242570626202031628}
   - component: {fileID: 3438660807880553758}
+  - component: {fileID: 6243521479948997119}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -200,3 +201,17 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.14, y: 0.25}
   m_EdgeRadius: 0
+--- !u!114 &6243521479948997119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6797031123112971182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee982f799e5ded8cda0fa08aed9b14db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellPrefab: {fileID: 8025839311511516802, guid: 06f9400e94ce89d59a0422d84ac0a9fb, type: 3}
+  spellDestroyTime: 4.9

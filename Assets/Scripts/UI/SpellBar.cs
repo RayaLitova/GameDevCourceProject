@@ -9,7 +9,7 @@ public class SpellBarHandler : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player").GetComponent<PlayerSpells>();
         
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < PlayerStats.active_spells.Count; i++)
             gameObject.transform.GetChild(i).GetComponent<Image>().sprite = PlayerStats.active_spells[i].icon;
     }
 
