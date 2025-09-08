@@ -5,6 +5,7 @@ using System.Linq;
 public class SpellGenerator : GoogleAIManager
 {    
     public UnityEngine.UI.Text input_field;
+    public GameObject input;
 
 	public GameObject spell_effect_prefab;
 
@@ -17,6 +18,15 @@ public class SpellGenerator : GoogleAIManager
     {
         Debug.Log("Generating spell from description: " + input_field.text);
         SendRequest(input_field.text);
+        input_field.text = "";
+        PlayerStats.available_generations--;
+    }
+
+    public void OnMouseOver(){
+        if(PlayerStats.available_generations > 0 && Input.GetMouseButtonDown(0)){
+            Debug.Log("yippie");
+            input.SetActive(true);
+        }
     }
 
     public SpellBase GenerateSpell(List<string> parameters)

@@ -58,9 +58,7 @@ public class SpellMasterWelcomeTexts : MonoBehaviour
 
     void OnDestroy()
     {
-        if(!SpellMasterWelcomeTexts.tutorial_passed) 
-            input_field.SetActive(true);
-
+        input_field.SetActive(true);
         SpellMasterWelcomeTexts.tutorial_passed = true;
         bubble.SetActive(false);
     }

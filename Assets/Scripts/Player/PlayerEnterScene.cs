@@ -9,11 +9,12 @@ public class PlayerEnterScene : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 targetVelocity;
     private Vector2 endPos = new Vector2(1, 0);
+    private Animator animator;
     
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        if (rb == null) return;
+        animator = GetComponent<Animator>();
     }
     
     void FixedUpdate()
@@ -21,6 +22,7 @@ public class PlayerEnterScene : MonoBehaviour
         MovePlayer();
         if(transform.position.x >= endPos.x)
         {
+            animator.SetBool("Reached", true);
             Destroy(this);
             Destroy(rb);
         }
