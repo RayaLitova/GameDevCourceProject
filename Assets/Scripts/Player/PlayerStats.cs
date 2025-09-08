@@ -18,6 +18,7 @@ public static class PlayerStats
  
     public static List<PassiveSpell> passive_spells = new List<PassiveSpell>();
     public static List<ActiveSpell> active_spells = new List<ActiveSpell>();
+    public static Color color = Color.white;
 
     public static void AddSpell(SpellBase spell)
     {
@@ -50,6 +51,7 @@ public static class PlayerStats
             PlayerStats.currentHealth = 0;
         if (PlayerStats.thorn_damage > 0 && enemy != null)
             enemy.TakeDamage(PlayerStats.thorn_damage);
+        PlayerStats.color = Color.red;
     }
 
     public static void GainExperience(int amount)
@@ -69,6 +71,6 @@ public static class PlayerStats
         PlayerStats.level++;
         PlayerStats.maxHealth += 20;
         PlayerStats.currentHealth = PlayerStats.maxHealth;
-        Debug.Log("Level up!");
+        PlayerStats.color = Color.yellow;
     }
 }

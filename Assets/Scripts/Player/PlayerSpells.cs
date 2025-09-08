@@ -6,6 +6,25 @@ public class PlayerSpells : MonoBehaviour
 {
 	public GameObject spellPrefab;
 	public float spellDestroyTime = 4.9f;
+	
+	private SpriteRenderer renderer;
+
+	void Start()
+	{
+		renderer = GetComponent<SpriteRenderer>();
+	}
+
+	void Update()
+	{
+		if(PlayerStats.color != Color.white)
+			Invoke("ResetColor", 3f);
+		renderer.color = PlayerStats.color;
+	}
+
+	public void ResetColor()
+	{
+		PlayerStats.color = Color.white;
+	}
 
 	public void CastSpell(Vector2 target, int spell_index)
 	{

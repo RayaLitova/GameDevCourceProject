@@ -18,6 +18,6 @@ public class EnemyGenerator : MonoBehaviour
         else
             Instantiate(melee_enemy, transform.position, Quaternion.identity);
         
-        Invoke("SpawnEnemy", 10f);
+        Invoke("SpawnEnemy", Random.Range(2, 10));
     }
 }
