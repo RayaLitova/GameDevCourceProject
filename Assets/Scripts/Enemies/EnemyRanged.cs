@@ -25,7 +25,6 @@ public class EnemyRanged : EnemyBase
 			5.ToString(),
 			0.ToString()
 		}) as ActiveSpell;
-		Debug.Log("Enemy spell: " + spell.name + " - " + spell.description);
 	}
 
 	public override void Attack()

@@ -8,11 +8,7 @@ public class SpellGenerator : GoogleAIManager
     public GameObject input;
 
 	public GameObject spell_effect_prefab;
-
-    void Start()
-    {
-        //SendRequest("I want a passive spell that heals me and increases my damage.");
-    }
+    private bool should_close_after_adding = false;
 
     public void GenerateSpellFromDescription()
     {
@@ -20,11 +16,11 @@ public class SpellGenerator : GoogleAIManager
         SendRequest(input_field.text);
         input_field.text = "";
         PlayerStats.available_generations--;
+        should_close_after_adding = PlayerStats.available_generations == 0;
     }
 
     public void OnMouseOver(){
         if(PlayerStats.available_generations > 0 && Input.GetMouseButtonDown(0)){
-            Debug.Log("yippie");
             input.SetActive(true);
         }
     }
@@ -106,5 +102,7 @@ public class SpellGenerator : GoogleAIManager
         SpellBase spell = GenerateSpell(parameters);
         if( spell == null ) return; // return some message
         PlayerStats.AddSpell(spell);
+        if(should_close_after_adding)
+            gameObject.GetComponent<SceneLoader>().LoadScene();
     }
 }

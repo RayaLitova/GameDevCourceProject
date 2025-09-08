@@ -1006,6 +1006,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input_field: {fileID: 0}
+  input: {fileID: 0}
   spell_effect_prefab: {fileID: 2323473171503516658, guid: 2ec3806249d9962dca4df4d16a6e97de, type: 3}
 --- !u!4 &968494310
 Transform:
@@ -101381,6 +101382,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2472696730418411049, guid: ad9f726d34cb0a5018418f53223c8080, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2472696730418411049, guid: ad9f726d34cb0a5018418f53223c8080, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2472696730418411049, guid: ad9f726d34cb0a5018418f53223c8080, type: 3}
       propertyPath: m_LocalPosition.x
       value: -45.7
       objectReference: {fileID: 0}
@@ -102048,7 +102057,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
